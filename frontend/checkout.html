@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - E-Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">E-Shop</a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#products" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        Cart (<span id="cart-count">0</span>)
+                    </a>
+                </li>
+                <li class="nav-item user-menu" id="user-menu" style="display: none;">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="user-name">User</a>
+                        <div class="dropdown-content">
+                            <a href="profile.html">Profile</a>
+                            <a href="orders.html">Orders</a>
+                            <a href="#" id="logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> > 
+            <a href="cart.html">Cart</a> > 
+            <span>Checkout</span>
+        </div>
+    </div>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <h1>Checkout</h1>
+            
+            <div class="checkout-container">
+                <div class="checkout-form">
+                    <form id="checkout-form">
+                        <!-- Shipping Address -->
+                        <div class="checkout-section-card">
+                            <h3><i class="fas fa-shipping-fast"></i> Shipping Address</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="street">Street Address</label>
+                                    <input type="text" id="street" name="street" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="zipCode">ZIP Code</label>
+                                    <input type="text" id="zipCode" name="zipCode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" name="country" value="United States" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="checkout-section-card">
+                            <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                            <div class="payment-methods">
+                                <div class="payment-option">
+                                    <input type="radio" id="credit-card" name="paymentMethod" value="Credit Card" checked>
+                                    <label for="credit-card">
+                                        <i class="fas fa-credit-card"></i> Credit Card
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="debit-card" name="paymentMethod" value="Debit Card">
+                                    <label for="debit-card">
+                                        <i class="fas fa-credit-card"></i> Debit Card
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="paypal" name="paymentMethod" value="PayPal">
+                                    <label for="paypal">
+                                        <i class="fab fa-paypal"></i> PayPal
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="cod" name="paymentMethod" value="Cash on Delivery">
+                                    <label for="cod">
+                                        <i class="fas fa-money-bill"></i> Cash on Delivery
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Notes -->
+                        <div class="checkout-section-card">
+                            <h3><i class="fas fa-sticky-note"></i> Order Notes (Optional)</h3>
+                            <div class="form-group">
+                                <textarea id="orderNotes" name="orderNotes" rows="3" 
+                                          placeholder="Any special instructions for your order..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="order-items" id="checkout-items">
+                            <!-- Order items will be loaded here -->
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="checkout-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (8%):</span>
+                            <span id="checkout-tax">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span id="checkout-shipping">$0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="checkout-total">$0.00</span>
+                        </div>
+
+                        <button type="submit" form="checkout-form" class="btn btn-primary btn-full" id="place-order-btn">
+                            <i class="fas fa-check"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>E-Shop</h3>
+                    <p>Your trusted online shopping destination</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="auth.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> info@eshop.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 E-Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
